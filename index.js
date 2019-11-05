@@ -37,7 +37,7 @@ function init ( ){
         } else if (i == 15){
             out+= '<div class="key" data="'+keyboardKeys[i]+'">Tab</div>' 
         } else if (i == 28){
-            out+= '<div class="key" data="'+keyboardKeys[i]+'">/</div>' 
+            out+= '<div class="key" data="'+keyboardKeys[i]+'"> |</div>' 
         } else if (i == 30){
             out+= '<div class="key" data="'+keyboardKeys[i]+'">Caps Lock</div>' 
         } else if (i == 41){
@@ -48,7 +48,7 @@ function init ( ){
             out+= '<div class="key" data="'+keyboardKeys[i]+'">Shift</div>' 
         } else if (i == 44 || i == 55){
             out+= '<div class="key" data="'+keyboardKeys[i]+'">↑</div>' 
-        }else if (i == 58 || i == 64){
+         } else if (i == 58 || i == 64){
             out+= '<div class="key" data="'+keyboardKeys[i]+'">Ctrl</div>' 
         } else if (i == 59){
             out+= '<div class="key" data="'+keyboardKeys[i]+'">Alt</div>' 
@@ -56,31 +56,15 @@ function init ( ){
             out+= '<div class="key" data="'+keyboardKeys[i]+'">→</div>' 
         } else if (i == 62){
             out+= '<div class="key" data="'+keyboardKeys[i]+'">↓</div>' 
-        }else if (i == 61){
+        } else if (i == 61){
             out+= '<div class="key" data="'+keyboardKeys[i]+'">←</div>' 
-        }
-
-        else {
+        } else {
          
     out+= '<div class="key" data="'+keyboardKeys[i]+'">'+String.fromCharCode(keyboardKeys[i])+'</div>';
         }  
     }
    document.querySelector("#keyboard").innerHTML = out;
 }
-
-/*function backspace() {
-    let out ="";
-    let keyboard= document.querySelector("#keyboard");
-    for ( let i=o; i<keyboard.length; i++){
-        if(i=60){
-            out += '<div class=key space><p>Space</p></div>';
-        } 
-        document.querySelector("#keyboard").innerHTML = out;
-    }
-    
-}*/
-
-
 
 init();
 
@@ -95,13 +79,25 @@ document.onkeypress = function (event) {
     
 }
 
-document.onkeyup = function (event) { 
+document.onkeydown = function (event) { 
     
     document.querySelectorAll('#keyboard .key').forEach(function (element){
         element.classList.remove('active');
-    });   
+    }); 
+    if (event.code == 'ShiftRight') { 
+        document.querySelector('#keyboard').childNodes[56].classList.add('active');
+    } else if  (event.code == 'ShiftLeft') {
+        document.querySelector('#keyboard').childNodes[44].classList.add('active');
+    } else if  (event.code == 'ControlLeft') {
+        document.querySelector('#keyboard').childNodes[58].classList.add('active');
+    } else if  (event.code == 'ControlRight') {
+        document.querySelector('#keyboard').childNodes[64].classList.add('active');
+    }  else if  (event.code == 'Backslash') {
+        document.querySelector('#keyboard').childNodes[28].classList.add('active');
+    }else {     
+      
     document.querySelector('#keyboard .key[data="' +event.keyCode+ '"]').classList.add('active');
-    
+    }
     
 }
 
@@ -117,6 +113,7 @@ document.querySelectorAll('#keyboard .key').forEach(function (element){
     let mouseClick = this.getAttribute('data');
     this.classList.add('active');
     console.log (mouseClick);
+     
   }
 })
 
@@ -133,11 +130,5 @@ document.getElementsByClassName('.enter').innerHTML = '<p>Shift</p>';
 
 document.querySelector('#keyboard').childNodes[44].classList.add('shift');
 document.querySelector('#keyboard').childNodes[56].classList.add('shift');
-
-
-
-
-
-
 
 document.querySelector('#keyboard').childNodes[60].classList.add('space');
