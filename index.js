@@ -100,8 +100,7 @@ document.onkeydown = function (event) {
     } else if  (event.code == 'ArrowRight') {
         document.querySelector('#keyboard').childNodes[63].classList.add('active');
     }else {     
-      
-    document.querySelector('#keyboard .key[data="' +event.keyCode+ '"]').classList.add('active');
+        document.querySelector('#keyboard .key[data="' +event.keyCode+ '"]').classList.add('active');
     }
     
 }
@@ -116,11 +115,9 @@ document.querySelectorAll('#keyboard .key').forEach(function (element){
         element.classList.remove('active');
     });  
     let mouseClick = this.getAttribute('data');
-    //const textareaVal = document.querySelector('.text-area').value;
-    this.classList.add('active');
-    console.log (mouseClick);
-    //document.body.text-HTMLTextAreaElement.append(mouseClick);
-     
+     this.classList.add('active');
+     document.querySelector('.text-area').value+= mouseClick.dataset.currentLetter;
+    
   }
 })
 
@@ -139,3 +136,4 @@ document.querySelector('#keyboard').childNodes[44].classList.add('shift');
 document.querySelector('#keyboard').childNodes[56].classList.add('shift');
 
 document.querySelector('#keyboard').childNodes[60].classList.add('space');
+
